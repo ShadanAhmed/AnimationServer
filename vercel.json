@@ -11,6 +11,6 @@
       "src": "/api/(.*)",
       "dest": "app.js"
     },
-    { "src": "/(.*)", "dest": "/public/$1" }
+    { "src": "/(.*)", "dest": "/frames/$1" }
   ]
 }
