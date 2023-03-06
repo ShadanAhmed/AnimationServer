@@ -17,8 +17,7 @@ app.use(
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    console.log(path.join(__dirname, "./public"));
-    cb(null, path.join(__dirname, "./public"));
+    cb(null, path.join(__dirname, "frames"));
   },
   filename: function (req, file, cb) {
     console.log(req.params.imageName);
@@ -44,8 +43,8 @@ const videoUpload = multer({ storage: videoStorage });
 
 // app.use(cors());
 app.use(bodyParser.json());
-app.use("/api/animation", animationRoutes);
-app.post("/api/frames/", upload.single("frame"), function (req, res, next) {
+app.use("/animation", animationRoutes);
+app.post("/frames/", upload.single("frame"), function (req, res, next) {
   console.log({ file: req.file });
   res.send(req.file);
 });
@@ -58,7 +57,7 @@ app.post(
   }
 );
 app.post(
-  "/api/frames/:imageName",
+  "/frames/:imageName",
   upload.single("frame"),
   function (req, res, next) {
     console.log({ file: req.file });
