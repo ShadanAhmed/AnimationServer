@@ -83,8 +83,10 @@ mongoose
     "mongodb+srv://shdn:shdn9431@cluster0.jw5ey.mongodb.net/animation?retryWrites=true&w=majority"
   )
   .then(() => {
-    app.listen(80, () => {
+    app.listen(3001, () => {
       console.log("app running on http://localhost:3001");
     });
   })
   .catch((err) => console.log(err));
+
+module.exports = app;
