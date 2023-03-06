@@ -5,6 +5,7 @@ const cors = require("cors");
 const animationRoutes = require("./routes/animation/index");
 const multer = require("multer");
 const fs = require("fs");
+const path = require("path");
 
 const app = express();
 
@@ -16,7 +17,7 @@ app.use(
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "public/");
+    cb(null, path.join(__dirname, "../public"));
   },
   filename: function (req, file, cb) {
     console.log(req.params.imageName);
