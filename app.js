@@ -5,6 +5,7 @@ const cors = require("cors");
 const animationRoutes = require("./routes/animation/index");
 const multer = require("multer");
 const fs = require("fs");
+const path = require("path");
 
 const app = express();
 
@@ -16,7 +17,8 @@ app.use(
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "frames");
+    console.log(path.join(__dirname, "./public"));
+    cb(null, path.join(__dirname, "./public"));
   },
   filename: function (req, file, cb) {
     console.log(req.params.imageName);
@@ -42,8 +44,8 @@ const videoUpload = multer({ storage: videoStorage });
 
 // app.use(cors());
 app.use(bodyParser.json());
-app.use("/animation", animationRoutes);
-app.post("/frames/", upload.single("frame"), function (req, res, next) {
+app.use("/api/animation", animationRoutes);
+app.post("/api/frames/", upload.single("frame"), function (req, res, next) {
   console.log({ file: req.file });
   res.send(req.file);
 });
@@ -56,7 +58,7 @@ app.post(
   }
 );
 app.post(
-  "/frames/:imageName",
+  "/api/frames/:imageName",
   upload.single("frame"),
   function (req, res, next) {
     console.log({ file: req.file });
@@ -88,3 +90,5 @@ mongoose
     });
   })
   .catch((err) => console.log(err));
+
+module.exports = app;
