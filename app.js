@@ -42,8 +42,8 @@ const videoUpload = multer({ storage: videoStorage });
 
 // app.use(cors());
 app.use(bodyParser.json());
-app.use("/animation", animationRoutes);
-app.post("/frames/", upload.single("frame"), function (req, res, next) {
+app.use("/api/animation", animationRoutes);
+app.post("/api/frames/", upload.single("frame"), function (req, res, next) {
   console.log({ file: req.file });
   res.send(req.file);
 });
@@ -56,7 +56,7 @@ app.post(
   }
 );
 app.post(
-  "/frames/:imageName",
+  "/api/frames/:imageName",
   upload.single("frame"),
   function (req, res, next) {
     console.log({ file: req.file });
