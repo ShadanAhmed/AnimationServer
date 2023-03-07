@@ -68,12 +68,12 @@ app.post(
 app.delete("/frames/:imageName", (req, res) => {
   const { imageName } = req.params;
 
-  fs.unlink(`./frames/${imageName}`, (err) => {
+  fs.unlink(`frames/${imageName}`, (err) => {
     if (err) {
       res.status(500).json({ err });
+    } else {
+      res.status(204).json(`${imageName} was deleted successfully`);
     }
-
-    res.status(204).json(`${imageName} was deleted successfully`);
   });
 });
 
